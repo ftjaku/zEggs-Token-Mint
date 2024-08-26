@@ -8,6 +8,7 @@ const { vars } = require("hardhat/config");
 const ALCHEMY_API_KEY = vars.get("ALCHEMY_API_KEY");
 
 // Add your Sepolia account private key to the configuration variables
+// using hardhat npx vars set <variable>
 // Beware: NEVER put real Ether into testing accounts
 const SEPOLIA_PRIVATE_KEY = vars.get("SEPOLIA_PRIVATE_KEY");
 
