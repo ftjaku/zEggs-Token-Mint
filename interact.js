@@ -1,13 +1,13 @@
 const { ethers } = require("ethers");
 
-const ALCHEMY_API_KEY = 'HTjEOEuoISwDEX_cCICEWi6HLZQXRYh8'
+const ALCHEMY_API_KEY = ''
 const provider = new ethers.providers.JsonRpcProvider(`https://eth-sepolia.g.alchemy.com/v2/${ALCHEMY_API_KEY}`)
 
 const account1 = "0xd8d7AD1014171D06C58f569082d80A857FcB6e61"
 const account2 = "0x6C062CCDfbDB3460D60CAA5002101875c22662bd"
 
-const privateKey1 = "379aae2662a17b653d42f031068bf0c705269097af124fc5338248b5c0e5a6d9"
-const wallet = new ethers.Wallet(privateKey1, provider)
+const PRIVATE_KEY1 = ""
+const wallet = new ethers.Wallet(PRIVATE_KEY1, provider)
 
 const abi = [
     "function name() view returns (string)",
