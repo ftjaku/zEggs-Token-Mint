@@ -32,12 +32,11 @@ const main = async () => {
     console.log(`Balance1: ${ethers.utils.formatEther(balance1)}\n`)
     console.log(`Balance2: ${ethers.utils.formatEther(balance2)}\n`)
 
-    const tx =  await wallet.sendTransaction({
-        to: account2,
-        value: ethers.utils.parseEther("10")
-    })
+    const contractWallet = contract.connect(wallet)
 
+    const tx =  await contractWallet.transfer(account2, ethers.utils.parseEther("90"))
     await tx.wait()
+
     console.log(tx)
 
     const balance1after = await contract.balanceOf(account1)
