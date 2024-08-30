@@ -1,13 +1,15 @@
+require('dotenv').config();
 const { ethers } = require("ethers");
 
-const ALCHEMY_API_KEY = ''
-const provider = new ethers.providers.JsonRpcProvider(`https://eth-sepolia.g.alchemy.com/v2/${ALCHEMY_API_KEY}`)
+// Need to learn to use .env so that I can hide api key and private key variables 
+const ALCHEMY_ID = process.env.ALCHEMY_ID
+const provider = new ethers.providers.JsonRpcProvider(`https://eth-sepolia.g.alchemy.com/v2/${ALCHEMY_ID}`)
 
-const account1 = "0xd8d7AD1014171D06C58f569082d80A857FcB6e61"
-const account2 = "0x6C062CCDfbDB3460D60CAA5002101875c22662bd"
+const account1 = process.env.ACCOUNT_1
+const account2 = process.env.ACCOUNT_2
 
-const PRIVATE_KEY1 = ""
-const wallet = new ethers.Wallet(PRIVATE_KEY1, provider)
+const PRIVATE_KEY_1 = process.env.PRIVATE_KEY_1
+const wallet = new ethers.Wallet(PRIVATE_KEY_1, provider)
 
 const abi = [
     "function name() view returns (string)",
@@ -25,7 +27,7 @@ const main = async () => {
     const totalSupply = await contract.totalSupply()
     const balance1 = await contract.balanceOf(account1)
     const balance2 = await contract.balanceOf(account2)
-
+    
     console.log(`Name: ${name}\n`)
     console.log(`Symbol: ${symbol}\n`)
     console.log(`Total Supply: ${ethers.utils.formatEther(totalSupply)}\n`)
@@ -50,8 +52,3 @@ const main = async () => {
 }
 
 main()
-
-
-
-
-
