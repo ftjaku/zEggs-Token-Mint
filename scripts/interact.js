@@ -1,9 +1,10 @@
 require('dotenv').config();
 const { ethers } = require("ethers");
 
+
 // Need to learn to use .env so that I can hide api key and private key variables 
 const ALCHEMY_ID = process.env.ALCHEMY_ID
-const provider = new ethers.providers.JsonRpcProvider(`https://eth-sepolia.g.alchemy.com/v2/${ALCHEMY_ID}`)
+const provider = new ethers.JsonRpcProvider(process.env.URL_PROVIDER_SEP)
 
 const account1 = process.env.ACCOUNT_1
 const account2 = process.env.ACCOUNT_2
@@ -18,7 +19,7 @@ const abi = [
     "function balanceOf(address) view returns (uint)",
     "function transfer(address to, uint amount) returns (bool)",
 ];
-const address = '0x481D463d02E6F906C709F1f9Af350cC9ADc6C543'
+const address = process.env.ADDRESS_CONTRACT_SEP
 const contract = new ethers.Contract(address, abi, provider)
 
 const main = async () => {
@@ -30,13 +31,13 @@ const main = async () => {
     
     console.log(`Name: ${name}\n`)
     console.log(`Symbol: ${symbol}\n`)
-    console.log(`Total Supply: ${ethers.utils.formatEther(totalSupply)}\n`)
-    console.log(`Balance1: ${ethers.utils.formatEther(balance1)}\n`)
-    console.log(`Balance2: ${ethers.utils.formatEther(balance2)}\n`)
+    console.log(`Total Supply: ${ethers.formatEther(totalSupply)}\n`)
+    console.log(`Balance1: ${ethers.formatEther(balance1)}\n`)
+    console.log(`Balance2: ${ethers.formatEther(balance2)}\n`)
 
     const contractWallet = contract.connect(wallet)
 
-    const tx =  await contractWallet.transfer(account2, ethers.utils.parseEther("90"))
+    const tx =  await contractWallet.transfer(account2, ethers.parseEther("5"))
     await tx.wait()
 
     console.log(tx)
@@ -44,8 +45,8 @@ const main = async () => {
     const balance1after = await contract.balanceOf(account1)
     const balance2after = await contract.balanceOf(account2)
 
-    console.log(`Balance1: ${ethers.utils.formatEther(balance1after)}\n`)
-    console.log(`Balance2: ${ethers.utils.formatEther(balance2after)}\n`)
+    console.log(`Balance1: ${ethers.formatEther(balance1after)}\n`)
+    console.log(`Balance2: ${ethers.formatEther(balance2after)}\n`)
 
     
 

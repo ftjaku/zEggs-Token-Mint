@@ -1,5 +1,5 @@
-require("@nomicfoundation/hardhat-toolbox");
 require('dotenv').config();
+require("@nomicfoundation/hardhat-toolbox");
 
 // Ensure your configuration variables are set before executing the script
 //const { vars } = require("hardhat/config");
@@ -17,8 +17,13 @@ require('dotenv').config();
 module.exports = {
   solidity: "0.8.24",
   networks: {
+    hardhat: {},
     sepolia: {
-      url: `https://eth-sepolia.g.alchemy.com/v2/${process.env.ALCHEMY_ID}`,
+      url: process.env.URL_PROVIDER_SEP,
+      accounts: [process.env.PRIVATE_KEY_1]
+    },
+    arbitrum: {
+      url: process.env.URL_PROVIDER_ARB,
       accounts: [process.env.PRIVATE_KEY_1]
     }
   }
